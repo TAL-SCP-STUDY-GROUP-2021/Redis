@@ -1,0 +1,360 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Redis高可用性 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="sync.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="sync.html">
+            
+                <a href="sync.html">
+            
+                    
+                    Redis主从同步机制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="avaliable.html">
+            
+                <a href="avaliable.html">
+            
+                    
+                    Redis高可用性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Redis高可用性</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="redis&#x9AD8;&#x53EF;&#x7528;&#x6027;&#x4FDD;&#x8BC1;">Redis&#x9AD8;&#x53EF;&#x7528;&#x6027;&#x4FDD;&#x8BC1;</h2>
+<h3 id="1-redis-sentinel&#xFF08;&#x54E8;&#x5175;&#xFF09;&#x67B6;&#x6784;&#x4E0B;&#x7684;&#x9AD8;&#x53EF;&#x7528;">1. Redis Sentinel&#xFF08;&#x54E8;&#x5175;&#xFF09;&#x67B6;&#x6784;&#x4E0B;&#x7684;&#x9AD8;&#x53EF;&#x7528;</h3>
+<p>Redis&#x7684;&#x4E3B;&#x4ECE;&#x590D;&#x5236;&#x4E0B;&#xFF0C;&#x4E00;&#x65E6;&#x4E3B;&#x8282;&#x70B9;&#x7531;&#x4E8E;&#x6545;&#x969C;&#x4E0D;&#x80FD;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x9700;&#x8981;&#x4EBA;&#x5DE5;&#x5C06;&#x4ECE;&#x8282;&#x70B9;&#x664B;&#x5347;&#x4E3A;&#x4E3B;&#x8282;&#x70B9;&#xFF0C;&#x540C;&#x65F6;&#x8FD8;&#x8981;&#x901A;&#x77E5;&#x5E94;&#x7528;&#x65B9;&#x66F4;&#x65B0;&#x4E3B;&#x8282;&#x70B9;&#x5730;&#x5740;&#xFF0C;&#x5BF9;&#x4E8E;&#x5F88;&#x591A;&#x5E94;&#x7528;&#x573A;&#x666F;&#x8FD9;&#x79CD;&#x6545;&#x969C;&#x5904;&#x7406;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x65E0;&#x6CD5;&#x63A5;&#x53D7;&#x7684;&#x3002;&#x4F46;&#x662F;Redis&#x4ECE;2.8&#x5F00;&#x59CB;&#x6B63;&#x5F0F;&#x63D0;&#x4F9B;&#x4E86;Redis Sentinel&#xFF08;&#x54E8;&#x5175;&#xFF09;&#x67B6;&#x6784;&#x6765;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<p>Redis Sentinel&#x662F;&#x4E00;&#x4E2A;&#x5206;&#x5E03;&#x5F0F;&#x67B6;&#x6784;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x82E5;&#x5E72;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x548C;Redis&#x6570;&#x636E;&#x8282;&#x70B9;&#xFF0C;&#x6BCF;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x5BF9;&#x6570;&#x636E;&#x8282;&#x70B9;&#x548C;&#x5176;&#x4F59;Sentinel&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x76D1;&#x63A7;&#xFF0C;&#x5F53;&#x5B83;&#x53D1;&#x73B0;&#x8282;&#x70B9;&#x4E0D;&#x53EF;&#x8FBE;&#x65F6;&#xFF0C;&#x4F1A;&#x5BF9;&#x8282;&#x70B9;&#x505A;&#x4E0B;&#x7EBF;&#x6807;&#x8BC6;&#x3002;&#x5982;&#x679C;&#x88AB;&#x6807;&#x8BC6;&#x7684;&#x662F;&#x4E3B;&#x8282;&#x70B9;&#xFF0C;&#x5B83;&#x8FD8;&#x4F1A;&#x548C;&#x5176;&#x4ED6;Sentinel&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x201C;&#x534F;&#x5546;&#x201D;&#xFF0C;&#x5F53;&#x5927;&#x591A;&#x6570;Sentinel&#x8282;&#x70B9;&#x90FD;&#x8BA4;&#x4E3A;&#x4E3B;&#x8282;&#x70B9;&#x4E0D;&#x53EF;&#x8FBE;&#x65F6;&#xFF0C;&#x5B83;&#x4EEC;&#x4F1A;&#x9009;&#x4E3E;&#x51FA;&#x4E00;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x6765;&#x5B8C;&#x6210;&#x81EA;&#x52A8;&#x6545;&#x969C;&#x8F6C;&#x79FB;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x540C;&#x65F6;&#x4F1A;&#x5C06;&#x8FD9;&#x4E2A;&#x53D8;&#x5316;&#x901A;&#x77E5;&#x7ED9;Redis&#x5E94;&#x7528;&#x65B9;&#x3002;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x5B8C;&#x5168;&#x662F;&#x81EA;&#x52A8;&#x7684;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4EBA;&#x5DE5;&#x6765;&#x4ECB;&#x5165;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x5957;&#x65B9;&#x6848;&#x5F88;&#x6709;&#x6548;&#x5730;&#x89E3;&#x51B3;&#x4E86;Redis&#x7684;&#x9AD8;&#x53EF;&#x7528;&#x95EE;&#x9898;&#x3002;</p>
+<h4 id="11-&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;">1.1 &#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;</h4>
+<h4 id="111-&#x76D1;&#x63A7;">1.1.1 &#x76D1;&#x63A7;</h4>
+<p>&#x4E09;&#x4E2A;&#x5B9A;&#x65F6;&#x76D1;&#x63A7;&#x4EFB;&#x52A1;</p>
+<p>1&#xFF09;&#x6BCF;&#x9694;10&#x79D2;&#xFF0C;&#x6BCF;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x5411;&#x4E3B;&#x8282;&#x70B9;&#x548C;&#x4ECE;&#x8282;&#x70B9;&#x53D1;&#x9001;info&#x547D;&#x4EE4;&#x83B7;&#x53D6;&#x6700;&#x65B0;&#x7684;&#x62D3;&#x6251;&#x7ED3;&#x6784;&#x3002;</p>
+<p>2&#xFF09;&#x6BCF;&#x9694;2&#x79D2;&#xFF0C;&#x6BCF;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x5411;Redis&#x6570;&#x636E;&#x8282;&#x70B9;&#x7684;<strong>sentinel</strong>:hello&#x9891;&#x9053;&#x4E0A;&#x53D1;&#x9001;&#x8BE5;Sentinel&#x8282;&#x70B9;&#x5BF9;&#x4E8E;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x5224;&#x65AD;&#x4EE5;&#x53CA;&#x5F53;&#x524D;Sentinel&#x8282;&#x70B9;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x540C;&#x65F6;&#x6BCF;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x4E5F;&#x4F1A;&#x8BA2;&#x9605;&#x8BE5;&#x9891;&#x9053;&#xFF0C;&#x6765;&#x4E86;&#x89E3;&#x5176;&#x4ED6;Sentinel&#x8282;&#x70B9;&#x4EE5;&#x53CA;&#x5B83;&#x4EEC;&#x5BF9;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x5224;&#x65AD;&#x3002;</p>
+<p>3&#xFF09;&#x6BCF;&#x9694;&#x4E00;&#x79D2;&#xFF0C;&#x6BCF;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x5411;&#x4E3B;&#x8282;&#x70B9;&#x3001;&#x4ECE;&#x8282;&#x70B9;&#x3001;&#x5176;&#x4F59;Sentinel&#x8282;&#x70B9;&#x53D1;&#x9001;&#x4E00;&#x6761;ping&#x547D;&#x4EE4;&#x505A;&#x4E00;&#x6B21;&#x5FC3;&#x8DF3;&#x68C0;&#x6D4B;&#xFF0C;&#x6765;&#x786E;&#x8BA4;&#x8FD9;&#x4E9B;&#x8282;&#x70B9;&#x5F53;&#x524D;&#x662F;&#x5426;&#x53EF;&#x8FBE;&#x3002;</p>
+<h4 id="112-&#x4E0B;&#x7EBF;&#x7684;&#x5224;&#x65AD;">1.1.2 &#x4E0B;&#x7EBF;&#x7684;&#x5224;&#x65AD;</h4>
+<p>&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;</p>
+<p>&#x56E0;&#x4E3A;&#x6BCF;&#x9694;&#x4E00;&#x79D2;&#xFF0C;&#x6BCF;&#x4E2A;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x5411;&#x4E3B;&#x8282;&#x70B9;&#x3001;&#x4ECE;&#x8282;&#x70B9;&#x3001;&#x5176;&#x4F59;Sentinel&#x8282;&#x70B9;&#x53D1;&#x9001;&#x4E00;&#x6761;ping&#x547D;&#x4EE4;&#x505A;&#x4E00;&#x6B21;&#x5FC3;&#x8DF3;&#x68C0;&#x6D4B;&#xFF0C;&#x5F53;&#x8FD9;&#x4E9B;&#x8282;&#x70B9;&#x8D85;&#x8FC7;down-after-milliseconds&#x6CA1;&#x6709;&#x8FDB;&#x884C;&#x6709;&#x6548;&#x56DE;&#x590D;&#xFF0C;Sentinel&#x8282;&#x70B9;&#x5C31;&#x4F1A;&#x5BF9;&#x8BE5;&#x8282;&#x70B9;&#x505A;&#x5931;&#x8D25;&#x5224;&#x5B9A;&#xFF0C;&#x8FD9;&#x4E2A;&#x884C;&#x4E3A;&#x53EB;&#x505A;&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;&#x3002;</p>
+<p>&#x5BA2;&#x89C2;&#x4E0B;&#x7EBF;</p>
+<p>&#x5F53;Sentinel&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;&#x7684;&#x8282;&#x70B9;&#x662F;&#x4E3B;&#x8282;&#x70B9;&#x65F6;&#xFF0C;&#x8BE5;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x5411;&#x5176;&#x4ED6;Sentinel&#x8282;&#x70B9;&#x8BE2;&#x95EE;&#x5BF9;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x5224;&#x65AD;&#xFF0C;&#x5F53;&#x8D85;&#x8FC7;<quorum>&#x4E2A;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x610F;&#x5473;&#x7740;&#x5927;&#x90E8;&#x5206;&#x7684;Sentinel&#x8282;&#x70B9;&#x90FD;&#x5BF9;&#x8FD9;&#x4E2A;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x4E0B;&#x7EBF;&#x505A;&#x4E86;&#x540C;&#x610F;&#x7684;&#x5224;&#x5B9A;&#xFF0C;&#x4E8E;&#x662F;&#x8BE5;Sentinel&#x8282;&#x70B9;&#x8BA4;&#x4E3A;&#x4E3B;&#x8282;&#x70B9;&#x786E;&#x5B9E;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x65F6;&#x8BE5;Sentinel&#x8282;&#x70B9;&#x4F1A;&#x505A;&#x51FA;&#x5BA2;&#x89C2;&#x4E0B;&#x7EBF;&#x7684;&#x51B3;&#x5B9A;&#x3002;</quorum></p>
+<h4 id="113-&#x65B0;&#x8282;&#x70B9;&#x9009;&#x4E3E;">1.1.3 &#x65B0;&#x8282;&#x70B9;&#x9009;&#x4E3E;</h4>
+<p>&#x9886;&#x5BFC;&#x8005;Sentinel&#x8282;&#x70B9;&#x9009;&#x4E3E;</p>
+<p>Raft&#x7B97;&#x6CD5;&#xFF1A;&#x5047;&#x8BBE;s1(sentinel-1)&#x6700;&#x5148;&#x5B8C;&#x6210;&#x5BA2;&#x89C2;&#x4E0B;&#x7EBF;&#xFF0C;&#x5B83;&#x4F1A;&#x5411;&#x5176;&#x4F59;Sentinel&#x8282;&#x70B9;&#x53D1;&#x9001;&#x547D;&#x4EE4;&#xFF0C;&#x8BF7;&#x6C42;&#x6210;&#x4E3A;&#x9886;&#x5BFC;&#x8005;&#xFF1B;&#x6536;&#x5230;&#x547D;&#x4EE4;&#x7684;Sentinel&#x8282;&#x70B9;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x540C;&#x610F;&#x8FC7;&#x5176;&#x4ED6;Sentinel&#x8282;&#x70B9;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x540C;&#x610F;s1&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5426;&#x5219;&#x62D2;&#x7EDD;&#xFF1B;&#x5982;&#x679C;s1&#x53D1;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x7968;&#x6570;&#x5DF2;&#x7ECF;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x67D0;&#x4E2A;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C06;&#x6210;&#x4E3A;&#x9886;&#x5BFC;&#x8005;&#x3002;</p>
+<h4 id="114-&#x6545;&#x969C;&#x8F6C;&#x79FB;">1.1.4 &#x6545;&#x969C;&#x8F6C;&#x79FB;</h4>
+<p>1&#xFF09;&#x9886;&#x5BFC;&#x8005;Sentinel&#x8282;&#x70B9;&#x5728;&#x4ECE;&#x8282;&#x70B9;&#x5217;&#x8868;&#x4E2D;&#x9009;&#x51FA;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x4F5C;&#x4E3A;&#x65B0;&#x7684;&#x4E3B;&#x8282;&#x70B9;</p>
+<p>2&#xFF09;&#x9009;&#x53D6;&#x4E0E;&#x4E3B;&#x8282;&#x70B9;&#x590D;&#x5236;&#x76F8;&#x4F3C;&#x5EA6;&#x6700;&#x9AD8;&#x7684;&#x4ECE;&#x8282;&#x70B9;&#xFF1A;</p>
+<p>slave &#x7684; priority &#x8BBE;&#x7F6E;&#x7684;&#x8D8A;&#x4F4E;&#xFF0C;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;&#xFF1B;</p>
+<p>&#x540C;&#x7B49;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;slave &#x590D;&#x5236;&#x7684;&#x6570;&#x636E;&#x8D8A;&#x591A;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;&#xFF1B;</p>
+<p>&#x76F8;&#x540C;&#x7684;&#x6761;&#x4EF6;&#x4E0B; runid &#x8D8A;&#x5C0F;&#x8D8A;&#x5BB9;&#x6613;&#x88AB;&#x9009;&#x4E2D;&#x3002;</p>
+<p>3&#xFF09;&#x9886;&#x5BFC;&#x8005;Sentinel&#x8282;&#x70B9;&#x8BA9;&#x5269;&#x4F59;&#x7684;&#x4ECE;&#x8282;&#x70B9;&#x6210;&#x4E3A;&#x65B0;&#x7684;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x4ECE;&#x8282;&#x70B9;</p>
+<p>4&#xFF09;Sentinel&#x8282;&#x70B9;&#x96C6;&#x5408;&#x4F1A;&#x5C06;&#x539F;&#x6765;&#x7684;&#x4E3B;&#x8282;&#x70B9;&#x66F4;&#x65B0;&#x4E3A;&#x4ECE;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x4FDD;&#x6301;&#x7740;&#x5BF9;&#x5176;&#x5173;&#x6CE8;&#xFF0C;&#x5F53;&#x5176;&#x6062;&#x590D;&#x540E;&#x547D;&#x4EE4;&#x5B83;&#x53BB;&#x590D;&#x5236;&#x65B0;&#x7684;&#x4E3B;&#x8282;&#x70B9;</p>
+<h3 id="12-&#x5B9E;&#x9A8C;">1.2 &#x5B9E;&#x9A8C;</h3>
+<p>&#x7F16;&#x8F91;redis-sentinel.conf, </p>
+<pre><code>bin 0.0.0.0
+sentinel monitor master 172.17.0.2 6379 2
+</code></pre><p>&#x6240;&#x6709;mymaster&#x4FEE;&#x6539;&#x4E3A;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x590D;&#x5236;&#x7ED9;&#x6240;&#x6709;&#x8282;&#x70B9;
+<img src="avaliable/7.png" alt="7">
+redis-sentinel redis-sentinel.conf&#x542F;&#x52A8;
+<img src="avaliable/9.png" alt="9">
+&#x5173;&#x95ED;&#x4E3B;&#x8282;&#x70B9;&#xFF0C;&#x6A21;&#x62DF;&#x5B95;&#x673A;
+<img src="avaliable/11.png" alt="11">
+<img src="avaliable/13.png" alt="13"></p>
+<h2 id="2redis-cluster&#xFF08;&#x96C6;&#x7FA4;&#xFF09;&#x4E0B;&#x7684;&#x9AD8;&#x53EF;&#x7528;">2.Redis Cluster&#xFF08;&#x96C6;&#x7FA4;&#xFF09;&#x4E0B;&#x7684;&#x9AD8;&#x53EF;&#x7528;</h2>
+<p>Redis Cluster &#x4F7F;&#x7528;&#x5206;&#x7247;&#x673A;&#x5236;&#xFF0C;&#x5728;&#x5185;&#x90E8;&#x5206;&#x4E3A; 16384 &#x4E2A; slot &#x63D2;&#x69FD;&#xFF0C;&#x5206;&#x5E03;&#x5728;&#x6240;&#x6709; master &#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x6BCF;&#x4E2A; master &#x8282;&#x70B9;&#x8D1F;&#x8D23;&#x4E00;&#x90E8;&#x5206; slot&#x3002;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#x65F6;&#x6309; key &#x505A; CRC16 &#x6765;&#x8BA1;&#x7B97;&#x5728;&#x54EA;&#x4E2A; slot&#xFF0C;&#x7531;&#x54EA;&#x4E2A; master &#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x6570;&#x636E;&#x7684;&#x5197;&#x4F59;&#x662F;&#x901A;&#x8FC7; slave &#x8282;&#x70B9;&#x6765;&#x4FDD;&#x969C;&#x3002;</p>
+<h4 id="21-&#x5B9E;&#x73B0;&#x539F;&#x7406;">2.1 &#x5B9E;&#x73B0;&#x539F;&#x7406;</h4>
+<h4 id="211-&#x4E0B;&#x7EBF;&#x7684;&#x5224;&#x65AD;">2.1.1 &#x4E0B;&#x7EBF;&#x7684;&#x5224;&#x65AD;</h4>
+<p>&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;</p>
+<p>&#x96C6;&#x7FA4;&#x4E2D;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x90FD;&#x4F1A;&#x5B9A;&#x671F;&#x5411;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#x53D1;&#x9001;ping&#x6D88;&#x606F;&#xFF0C;&#x63A5;&#x53D7;&#x8282;&#x70B9;&#x56DE;&#x590D;ping&#x6D88;&#x606F;&#x4F5C;&#x4E3A;&#x54CD;&#x5E94;&#x3002;&#x5982;&#x679C;&#x5728;cluster-node-timeout&#x65F6;&#x95F4;&#x5185;&#x901A;&#x4FE1;&#x4E00;&#x76F4;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x53D1;&#x9001;&#x8282;&#x70B9;&#x4F1A;&#x8BA4;&#x4E3A;&#x63A5;&#x6536;&#x8282;&#x70B9;&#x5B58;&#x5728;&#x6545;&#x969C;&#xFF0C;&#x628A;&#x63A5;&#x53D7;&#x8282;&#x70B9;&#x6807;&#x8BB0;&#x4E3A;&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;(pfail)&#x72B6;&#x6001;&#x3002;</p>
+<p>&#x5BA2;&#x89C2;&#x4E0B;&#x7EBF;</p>
+<p>1)&#x5F53;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#x5224;&#x65AD;&#x53E6;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;&#x540E;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x8282;&#x70B9;&#x72B6;&#x6001;&#x4F1A;&#x8DDF;&#x968F;&#x6D88;&#x606F;&#x5728;&#x96C6;&#x7FA4;&#x5185;&#x4F20;&#x64AD;&#x3002;</p>
+<p>2)&#x5047;&#x8BBE;&#x8282;&#x70B9;a&#x6807;&#x8BB0;&#x8282;&#x70B9;b&#x4E3A;&#x4E3B;&#x89C2;&#x4E0B;&#x7EBF;&#xFF0C;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x540E;&#x8282;&#x70B9;a&#x901A;&#x8FC7;&#x6D88;&#x606F;&#x628A;&#x8282;&#x70B9;b&#x7684;&#x72B6;&#x6001;&#x53D1;&#x9001;&#x5230;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#xFF0C;&#x5F53;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#x6536;&#x5230;&#x6D88;&#x606F;&#x5E76;&#x89E3;&#x6790;&#x51FA;&#x6D88;&#x606F;&#x4F53;&#x4E2D;&#x542B;&#x6709;b&#x7684;pfail&#x72B6;&#x6001;&#xFF0C;&#x628A;&#x8282;&#x70B9;b&#x52A0;&#x5165;&#x4E0B;&#x7EBF;&#x62A5;&#x544A;&#x94FE;&#x8868;&#xFF1B;</p>
+<p>3)&#x5F53;&#x67D0;&#x4E00;&#x8282;&#x70B9;c&#x6536;&#x5230;&#x8282;&#x70B9;b&#x7684;pfail&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x6B64;&#x65F6;&#x6709;&#x8D85;&#x8FC7;&#x4E00;&#x534A;&#x7684;&#x69FD;&#x4E3B;&#x8282;&#x70B9;&#x90FD;&#x6807;&#x8BB0;&#x4E86;&#x8282;&#x70B9;b&#x4E3A;pfail&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5219;&#x6807;&#x8BB0;&#x6545;&#x969C;&#x8282;&#x70B9;b&#x4E3A;&#x5BA2;&#x89C2;&#x4E0B;&#x7EBF;&#xFF1B;</p>
+<p>4)&#x5411;&#x96C6;&#x7FA4;&#x5E7F;&#x64AD;&#x4E00;&#x6761;pfail&#x6D88;&#x606F;&#xFF0C;&#x901A;&#x77E5;&#x96C6;&#x7FA4;&#x5185;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x6807;&#x8BB0;&#x6545;&#x969C;&#x8282;&#x70B9;b&#x4E3A;&#x5BA2;&#x89C2;&#x4E0B;&#x7EBF;&#x72B6;&#x6001;&#x5E76;&#x7ACB;&#x523B;&#x751F;&#x6548;&#xFF0C;&#x540C;&#x65F6;&#x901A;&#x77E5;&#x6545;&#x969C;&#x8282;&#x70B9;b&#x7684;&#x4ECE;&#x8282;&#x70B9;&#x89E6;&#x53D1;&#x6545;&#x969C;&#x8F6C;&#x79FB;&#x6D41;&#x7A0B;&#x3002;</p>
+<h4 id="212-&#x6545;&#x969C;&#x4FEE;&#x590D;">2.1.2 &#x6545;&#x969C;&#x4FEE;&#x590D;</h4>
+<p>1)&#x8D44;&#x683C;&#x68C0;&#x67E5;</p>
+<p>&#x82E5;&#x4ECE;&#x8282;&#x70B9;&#x4E0E;&#x4E3B;&#x8282;&#x70B9;&#x65AD;&#x7EBF;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#xFF0C;&#x5219;&#x4E0D;&#x5177;&#x5907;&#x8D44;&#x683C;&#x3002;</p>
+<p>&#x5F53;&#x4ECE;&#x8282;&#x70B9;&#x7B26;&#x5408;&#x6545;&#x969C;&#x8F6C;&#x79FB;&#x8D44;&#x683C;&#x540E;&#xFF0C;&#x8981;&#x7B49;&#x5F85;&#x4E00;&#x6BB5;&#x9009;&#x4E3E;&#x65F6;&#x95F4;&#x540E;&#x624D;&#x5F00;&#x59CB;&#x9009;&#x4E3E;&#x3002;</p>
+<p>&#x5728;&#x6545;&#x969C;&#x8282;&#x70B9;&#x7684;&#x6240;&#x6709;&#x4ECE;&#x8282;&#x70B9;&#x4E2D;&#xFF0C;&#x590D;&#x5236;&#x504F;&#x79FB;&#x91CF;&#x6700;&#x5927;&#x7684;&#x90A3;&#x4E2A;&#x4ECE;&#x8282;&#x70B9;&#x6700;&#x5148;&#x5F00;&#x59CB;&#xFF08;&#x4E0E;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x6570;&#x636E;&#x6700;&#x4E00;&#x81F4;&#xFF09;&#x8FDB;&#x884C;&#x9009;&#x4E3E;&#xFF0C;&#x7136;&#x540E;&#x662F;&#x6B21;&#x5927;&#x7684;&#x8282;&#x70B9;&#x5F00;&#x59CB;&#x9009;&#x4E3E;.....&#x5269;&#x4E0B;&#x5176;&#x4F59;&#x7684;&#x4ECE;&#x8282;&#x70B9;&#x7B49;&#x5F85;&#x5230;&#x5B83;&#x4EEC;&#x7684;&#x9009;&#x4E3E;&#x65F6;&#x95F4;&#x5230;&#x8FBE;&#x540E;&#x518D;&#x8FDB;&#x884C;&#x9009;&#x4E3E;&#x3002;</p>
+<p>3)&#x53D1;&#x8D77;&#x9009;&#x4E3E;</p>
+<pre><code>1.&#x5C06;&#x81EA;&#x5DF1;&#x8BB0;&#x5F55;&#x7684;&#x96C6;&#x7FA4;currentEpoch&#x52A0;1&#xFF0C;&#x5E76;&#x5E7F;&#x64AD;FAILOVER_AUTH_REQUEST&#x4FE1;&#x606F;
+
+2.&#x5176;&#x4ED6;&#x8282;&#x70B9;&#x6536;&#x5230;&#x8BE5;&#x4FE1;&#x606F;&#xFF0C;&#x53EA;&#x6709;master&#x54CD;&#x5E94;&#xFF0C;&#x5224;&#x65AD;&#x8BF7;&#x6C42;&#x8005;&#x7684;&#x5408;&#x6CD5;&#x6027;&#xFF0C;&#x5E76;&#x53D1;&#x9001;FAILOVER_AUTH_ACK&#xFF0C;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;epoch&#x53EA;&#x53D1;&#x9001;&#x4E00;&#x6B21;ack
+
+3.&#x5C1D;&#x8BD5;failover&#x7684;slave&#x6536;&#x96C6;FAILOVER_AUTH_ACK
+</code></pre><p>4)&#x9009;&#x4E3E;&#x6295;&#x7968;</p>
+<p>&#x53EA;&#x6709;&#x6301;&#x6709;&#x69FD;&#x7684;&#x4E3B;&#x8282;&#x70B9;&#x624D;&#x5177;&#x6709;&#x4E00;&#x5F20;&#x552F;&#x4E00;&#x7684;&#x9009;&#x7968;&#xFF0C;&#x4ECE;&#x4ECE;&#x8282;&#x70B9;&#x6536;&#x96C6;&#x5230;N/2 + 1&#x4E2A;&#x6301;&#x6709;&#x69FD;&#x7684;&#x4E3B;&#x8282;&#x70B9;&#x6295;&#x7968;&#x65F6;&#xFF0C;&#x4ECE;&#x8282;&#x70B9;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x66FF;&#x6362;&#x4E3B;&#x8282;&#x70B9;&#x64CD;&#x4F5C;</p>
+<p>5)&#x66FF;&#x6362;&#x4E3B;&#x8282;&#x70B9;</p>
+<p>&#x5F53;&#x4ECE;&#x8282;&#x70B9;&#x6536;&#x96C6;&#x5230;&#x8DB3;&#x591F;&#x7684;&#x9009;&#x7968;&#x4E4B;&#x540E;&#xFF0C;&#x89E6;&#x53D1;&#x66FF;&#x6362;&#x4E3B;&#x8282;&#x70B9;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code>&#x5F53;&#x524D;&#x4ECE;&#x8282;&#x70B9;&#x53D6;&#x6D88;&#x590D;&#x5236;&#x53D8;&#x4E3A;&#x4E3B;&#x8282;&#x70B9;&#xFF1B;
+
+&#x64A4;&#x9500;&#x6545;&#x969C;&#x4E3B;&#x8282;&#x70B9;&#x8D1F;&#x8D23;&#x7684;&#x69FD;&#xFF0C;&#x5E76;&#x628A;&#x8FD9;&#x4E9B;&#x69FD;&#x59D4;&#x6D3E;&#x7ED9;&#x81EA;&#x5DF1;&#xFF1B;
+
+&#x5411;&#x96C6;&#x7FA4;&#x5E7F;&#x64AD;&#x81EA;&#x5DF1;&#x7684;pong&#x6D88;&#x606F;&#xFF0C;&#x901A;&#x77E5;&#x96C6;&#x7FA4;&#x5185;&#x6240;&#x6709;&#x7684;&#x8282;&#x70B9;&#x5F53;&#x524D;&#x4ECE;&#x8282;&#x70B9;&#x53D8;&#x4E3A;&#x4E3B;&#x8282;&#x70B9;&#x5E76;&#x63A5;&#x7BA1;&#x4E86;&#x6545;&#x969C;&#x4E3B;&#x8282;&#x70B9;&#x7684;&#x69FD;&#x4FE1;&#x606F;&#x3002;
+</code></pre><h3 id="22-&#x5B9E;&#x9A8C;">2.2 &#x5B9E;&#x9A8C;</h3>
+<p>&#x5355;&#x4E3B;&#x673A;&#x5373;&#x53EF;&#x8FDB;&#x884C;&#x6A21;&#x62DF;</p>
+<pre><code class="lang-dockerfile">docker <span class="hljs-keyword">run</span> -it --name cluster -d -p 30003:6379 redis /bin/bash
+mkdir -p /data/700{1..6}
+</code></pre>
+<p>&#x540C;&#x6837;&#x4FEE;&#x6539;redis.conf&#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-dockerfile">port 7001     
+cluster-enabled yes             <span class="hljs-comment">#&#x6253;&#x5F00;&#x96C6;&#x7FA4;&#x8BBE;&#x5907;</span>
+cluster-config-file nodes.conf  <span class="hljs-comment">#node&#x4FE1;&#x606F;&#x6587;&#x4EF6;</span>
+cluster-node-timeout 5000       <span class="hljs-comment">#&#x5EF6;&#x65F6;&#x65F6;&#x95F4;</span>
+appendonly yes
+daemonize yes                   <span class="hljs-comment">#&#x540E;&#x53F0;&#x8FD0;&#x884C;</span>
+pidfile /data/7001/redis.pid    <span class="hljs-comment">##pid&#x6587;&#x4EF6;&#x5B58;&#x653E;&#x76EE;&#x5F55;</span>
+logfile /data/7001/redis.log    <span class="hljs-comment">##&#x65E5;&#x5FD7;&#x5B58;&#x653E;&#x76EE;&#x5F55;</span>
+</code></pre>
+<pre><code class="lang-dockerfile">docker cp redis.conf cluster:/data/7001
+docker attach cluster
+cd /data/7001
+redis-server redis.conf
+ps ax
+</code></pre>
+<p>&#x521B;&#x5EFA;&#x96C6;&#x7FA4;</p>
+<pre><code class="lang-dockerfile">redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005  127.0.0.1:7006 --cluster-replicas 1
+</code></pre>
+<p><img src="avaliable/1.png" alt="1">
+&#x96C6;&#x7FA4;&#x72B6;&#x6001;</p>
+<pre><code class="lang-dockerfile">redis-cli -p 7001 cluster info
+</code></pre>
+<p><img src="avaliable/2.png" alt="2"></p>
+<pre><code class="lang-dockerfile">redis-cli --cluster check 127.0.0.1:7001
+</code></pre>
+<p><img src="avaliable/16.png" alt="16">
+&#x8282;&#x70B9;&#x72B6;&#x6001;
+<img src="avaliable/3.png" alt="3">
+&#x6DFB;&#x52A0;&#x6570;&#x636E;</p>
+<pre><code class="lang-dockerfile">redis-cli -c -p 7001
+</code></pre>
+<p><img src="avaliable/4.png" alt="4">
+&#x67E5;&#x8BE2;&#x6570;&#x636E;
+<img src="avaliable/5.png" alt="5">
+&#x5173;&#x95ED;&#x8282;&#x70B9;2
+<img src="avaliable/15.png" alt="15">
+<img src="avaliable/14.png" alt="14"></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="sync.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Redis主从同步机制">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Redis高可用性","level":"1.3","depth":1,"previous":{"title":"Redis主从同步机制","level":"1.2","depth":1,"path":"3/sync.md","ref":"3/sync.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3/avaliable.md","mtime":"2021-10-13T09:27:43.182Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-13T09:32:13.874Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
