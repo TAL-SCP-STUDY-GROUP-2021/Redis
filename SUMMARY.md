@@ -6,3 +6,5 @@
 
 * [Redis高可用性](3/avaliable.md)
 
+* [redis持久化](redis持久化.md)
+* [缓存与数据库的一致性](缓存与数据库的一致性.md)
