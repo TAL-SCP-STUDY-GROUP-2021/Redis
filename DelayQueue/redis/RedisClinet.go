@@ -1,8 +1,6 @@
 package redis
 
 import (
-	"context"
-	"fmt"
 	"github.com/go-redis/redis/v8"
 )
 
@@ -17,12 +15,5 @@ func CreateRedisClient() (client *Client) {
 		Password: "gm123456", // no password set
 		DB:       0,          // use default DB
 	})
-	res, err := client.Ping(context.Background()).Result()
-	if err != nil {
-		fmt.Printf("%s\n", res)
-	} else {
-		fmt.Printf("%s\n", err)
-
-	}
 	return client
 }
